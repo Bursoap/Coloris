@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'notes/style.css' %}" />
+</head>
+<body>
+
+    <div class="form">
+        <form action="/create-note/" method="POST">{% csrf_token %}
+            <textarea placeholder="Note text" name="note_text"></textarea><br>
+            <button type="submit">Note</button>
+        </form>
+    </div>
+
+    <div class="table">
+        <table>
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.note_text }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
