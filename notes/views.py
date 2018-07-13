@@ -1,7 +1,11 @@
 from django.views import generic
 import re
+
+from rest_framework.viewsets import ModelViewSet
+
 from notes.forms import CreateNoteForm
 from notes.models import Note
+from notes.serializers import NoteSerializer
 
 
 class NoteCreateView(generic.FormView):
@@ -37,3 +41,8 @@ class NotesListView(generic.ListView):
 
     def get_queryset(self):
         return Note.objects.all().order_by('-weight')
+
+
+class NoteAPIView(ModelViewSet):
+    serializer_class = NoteSerializer
+    queryset = Note.objects.all().order_by('-weight')
